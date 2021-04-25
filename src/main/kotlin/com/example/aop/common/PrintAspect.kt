@@ -2,6 +2,7 @@ package com.example.aop.common
 
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.After
+import org.aspectj.lang.annotation.AfterThrowing
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
@@ -17,6 +18,10 @@ class PrintAspect {
 
     @Pointcut("execution(* com.example.aop.service.execution.KotlinService.print(..))")
     private fun kotlinPrint() {
+    }
+
+    @Pointcut("execution(* com.example.aop.service.execution.KotlinService.exception(..))")
+    private fun kotlinException() {
     }
 
     @Pointcut("execution(* com.example.aop.service.execution.JavaService.print(..))")
@@ -35,6 +40,12 @@ class PrintAspect {
     @After("javaPrint()")
     fun afterPrint() {
         logger.info("After Java Print")
+    }
+
+    @AfterThrowing(pointcut = "kotlinException()", throwing = "exception")
+    fun afterThrow(exception: IllegalArgumentException) {
+        logger.info("After IllegalArgumentException ${exception.message}")
+        throw IllegalArgumentException("AOP Throw")
     }
 
     @Around("jsPrint()")

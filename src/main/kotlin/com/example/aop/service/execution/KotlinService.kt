@@ -11,4 +11,8 @@ class KotlinService {
     fun print() {
         logger.info("Kotlin")
     }
+
+    fun exception() {
+        throw IllegalArgumentException("예외 발생")
+    }
 }
