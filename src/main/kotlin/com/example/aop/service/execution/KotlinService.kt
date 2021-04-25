@@ -15,4 +15,6 @@ class KotlinService {
     fun exception() {
         throw IllegalArgumentException("예외 발생")
     }
+
+    fun getValue() = "코틀린 잘하고 싶다."
 }

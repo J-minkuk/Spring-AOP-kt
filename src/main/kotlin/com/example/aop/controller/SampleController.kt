@@ -16,6 +16,7 @@ class SampleController(
     fun print(): String {
         kotlinService.print()
         javaService.print()
+        kotlinService.getValue()
         return javascriptService.print()
     }
 
